@@ -43,5 +43,8 @@ class Tools:
         }
 
         response = requests.request("POST", url, headers=headers, data=payload).json()
-
-        return response['organic'][0]['snippet']
+        print(response)
+        try:
+            return response['organic'][0]['snippet']
+        except KeyError:
+            return "No search results found."

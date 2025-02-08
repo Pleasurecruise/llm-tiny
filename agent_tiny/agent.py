@@ -74,10 +74,11 @@ class Agent:
         if plugin_name:
             response += self.call_plugin(plugin_name, plugin_args)
         response, his = self.model.chat(response, history, self.system_prompt)
+        # response, his = self.model.chat(response + "\nFinal Answer:", history, self.system_prompt)
         return response, his
 
-
 if __name__ == '__main__':
-    agent = Agent('/root/autodl-tmp/llm-learning/model/Shanghai_AI_Laboratory/internlm2-chat-7b')
+    # agent = Agent('/root/autodl-tmp/llm-learning/model/Shanghai_AI_Laboratory/internlm2-chat-7b')
+    agent = Agent('F:/modelscope/Shanghai_AI_Laboratory/internlm2_5-7b-chat')
     prompt = agent.build_system_input()
     print(prompt)

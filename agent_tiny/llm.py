@@ -22,8 +22,11 @@ class InternLM2Chat(BaseModel):
     def load_model(self):
         print('================ Loading model ================')
         self.tokenizer = AutoTokenizer.from_pretrained(self.path, trust_remote_code=True)
+        # self.model = AutoModelForCausalLM.from_pretrained(self.path, torch_dtype=torch.float16,
+        #                                                   trust_remote_code=True).cuda().eval()
         self.model = AutoModelForCausalLM.from_pretrained(self.path, torch_dtype=torch.float16,
-                                                          trust_remote_code=True).cuda().eval()
+                                                          trust_remote_code=True).eval()
+        # Removed .cuda() to ensure the model runs on CPU
         print('================ Model loaded ================')
 
     def chat(self, prompt: str, history: List[dict], meta_instruction: str = '') -> tuple[Any, Any]:
